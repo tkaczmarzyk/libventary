@@ -1,0 +1,6 @@
+/target/
+/events-store
+.classpath
+.project
+.settings
+events-store
