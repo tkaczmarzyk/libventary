@@ -12,4 +12,5 @@ public class BookAdded {
 
     private final UUID bookId;
     private final String title;
+    private final String author;
 }

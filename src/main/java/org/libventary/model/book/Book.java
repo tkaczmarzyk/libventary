@@ -6,14 +6,13 @@ import java.util.UUID;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
-import org.libventary.model.reader.BorrowingLimitEstablished;
 
 
 public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
     
-    private static final int INITIAL_BORROWING_LIMIT = 5;
-    
     private static final long serialVersionUID = 1L;
+
+    private static final int RESERVATION_TIME_DAYS = 2;
     
     @AggregateIdentifier
     private UUID id;
@@ -23,9 +22,8 @@ public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
     Book() {
     }
     
-    public Book(UUID id, String title) {
-        apply(new BookAdded(id, title));
-        apply(new BorrowingLimitEstablished(id, INITIAL_BORROWING_LIMIT));
+    public Book(UUID id, String title, String author) {
+        apply(new BookAdded(id, title, author));
     }
     
     @EventHandler
@@ -34,14 +32,15 @@ public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
     }
     
     @EventHandler
-    protected void handle(BookReserved bookBorrowed) {
+    protected void handle(BookReserved bookReserved) {
         reserved = true;
     }
 
-    public void reserveBy(UUID cardId) {
-        if(reserved) {
-            new BookAlreadyBorrowedException();
+    public void reserveBy(UUID readerId, ReaderDomainService readerService) {
+        if (!readerService.isReservationLimitReached(readerId)) {
+            apply(new BookReserved(id, readerId, LocalDate.now(), LocalDate.now().plusDays(2)));
+        } else {
+            throw new ReservationLimitReachedException();
         }
-        apply(new BookReserved(id, cardId, LocalDate.now(), LocalDate.MAX));
     }
 }

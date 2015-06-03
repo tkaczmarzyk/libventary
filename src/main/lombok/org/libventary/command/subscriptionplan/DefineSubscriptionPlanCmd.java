@@ -3,10 +3,10 @@ package org.libventary.command.subscriptionplan;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.libventary.model.reader.Money;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import org.libventary.model.reader.Money;
 
 @AllArgsConstructor
 @Getter

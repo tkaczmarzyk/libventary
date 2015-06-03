@@ -2,10 +2,10 @@ package org.libventary.command.reader;
 
 import java.util.UUID;
 
-import org.libventary.model.reader.Address;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import org.libventary.model.reader.Address;
 
 @AllArgsConstructor
 @Getter
