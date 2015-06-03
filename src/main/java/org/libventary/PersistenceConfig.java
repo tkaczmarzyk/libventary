@@ -22,7 +22,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.cohesiva.cqrskrk.projection")
+@EnableJpaRepositories(basePackages = "org.libventary.projection")
 @EnableTransactionManagement
 public class PersistenceConfig {
 
@@ -53,7 +53,7 @@ public class PersistenceConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setPersistenceUnitName("cqrs-krk-pu");
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("org.axonframework.eventstore.jpa", "org.axonframework.saga.repository.jpa", "com.cohesiva.cqrskrk.projection");
+        factory.setPackagesToScan("org.axonframework.eventstore.jpa", "org.axonframework.saga.repository.jpa", "org.libventary.projection");
         factory.setDataSource(dataSource());
         factory.setJpaProperties(jpaProperties());
         

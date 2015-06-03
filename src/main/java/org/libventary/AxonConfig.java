@@ -17,14 +17,18 @@ import org.axonframework.saga.SagaFactory;
 import org.axonframework.saga.SagaRepository;
 import org.axonframework.saga.repository.jpa.JpaSagaRepository;
 import org.axonframework.saga.spring.SpringResourceInjector;
+import org.axonframework.serializer.xml.XStreamSerializer;
 import org.axonframework.unitofwork.SpringTransactionManager;
+import org.libventary.infrastructure.LocalDateConverter;
 import org.libventary.model.book.Book;
-import org.libventary.model.librarycard.Reader;
+import org.libventary.model.reader.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import com.thoughtworks.xstream.XStream;
 
 
 @Configuration
@@ -63,7 +67,10 @@ public class AxonConfig {
 
 	@Bean
 	public EventStore eventStore() {
-		return new JpaEventStore(entityManagerProvider());
+	    XStream xStream = new XStream();
+	    xStream.registerConverter(new LocalDateConverter());
+	    XStreamSerializer xStreamSerializer = new XStreamSerializer (xStream);
+		return new JpaEventStore(entityManagerProvider(), xStreamSerializer);
 	}
 	
 	@Bean

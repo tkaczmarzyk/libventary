@@ -12,6 +12,6 @@ import lombok.ToString;
 @ToString
 public class BorrowingLimitEstablished {
 
-    private final UUID libraryCardId;
+    private final UUID readerId;
     private final int limit;
 }

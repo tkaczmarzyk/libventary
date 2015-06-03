@@ -6,9 +6,9 @@ import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.Before;
 import org.junit.Test;
-import org.libventary.command.librarycard.ReaderCommandHandler;
+import org.libventary.command.reader.ReaderCommandHandler;
 import org.libventary.command.reader.RegisterReaderCmd;
-import org.libventary.model.librarycard.Reader;
+import org.libventary.model.reader.Reader;
 
 
 public class ReaderTest {
