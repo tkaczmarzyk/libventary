@@ -16,7 +16,6 @@ import org.axonframework.saga.GenericSagaFactory;
 import org.axonframework.saga.SagaFactory;
 import org.axonframework.saga.SagaManager;
 import org.axonframework.saga.SagaRepository;
-import org.axonframework.saga.annotation.AbstractAnnotatedSaga;
 import org.axonframework.saga.annotation.AnnotatedSagaManager;
 import org.axonframework.saga.repository.jpa.JpaSagaRepository;
 import org.axonframework.saga.spring.SpringResourceInjector;
