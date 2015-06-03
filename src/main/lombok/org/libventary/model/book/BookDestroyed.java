@@ -1,4 +1,4 @@
-package org.libventary.command.librarycard;
+package org.libventary.model.book;
 
 import java.util.UUID;
 
@@ -8,8 +8,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ConfirmBookReservationCmd {
+public class BookDestroyed {
 
-    private final UUID libraryCardId;
     private final UUID bookId;
 }

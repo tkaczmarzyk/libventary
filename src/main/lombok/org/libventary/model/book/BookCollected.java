@@ -9,10 +9,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class BookReserved {
+public class BookCollected {
 
     private final UUID bookId;
     private final UUID readerId;
-    private final LocalDate fromDate;
-    private final LocalDate dueDate;
+    private final LocalDate collectionDate;
 }

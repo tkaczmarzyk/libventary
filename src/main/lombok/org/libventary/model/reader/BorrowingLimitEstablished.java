@@ -1,4 +1,4 @@
-package org.libventary.model.librarycard;
+package org.libventary.model.reader;
 
 import java.util.UUID;
 

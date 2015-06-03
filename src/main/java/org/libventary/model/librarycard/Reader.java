@@ -5,9 +5,13 @@ import java.util.UUID;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
+import org.libventary.model.reader.Address;
+import org.libventary.model.reader.BookReservationFinalized;
+import org.libventary.model.reader.BorrowingLimitEstablished;
+import org.libventary.model.reader.ReaderRegistered;
 
 
-public class LibraryCard extends AbstractAnnotatedAggregateRoot<UUID> {
+public class Reader extends AbstractAnnotatedAggregateRoot<UUID> {
 
     private static final int INITIAL_BORROWING_LIMIT = 5;
     
@@ -16,23 +20,20 @@ public class LibraryCard extends AbstractAnnotatedAggregateRoot<UUID> {
     @AggregateIdentifier
     private UUID id;
     
-    LibraryCard() {
+    Reader() {
     }
     
-    public LibraryCard(UUID id, String cardholderName) {
-        apply(new LibraryCardRegistered(id, cardholderName));
+    public Reader(UUID id, String name, Address address) {
+        apply(new ReaderRegistered(id, name, address));
         apply(new BorrowingLimitEstablished(id, INITIAL_BORROWING_LIMIT));
     }
     
     @EventHandler
-    protected void handle(LibraryCardRegistered registeredEvent) {
-        this.id = registeredEvent.getLibraryCardId();
+    protected void handle(ReaderRegistered registeredEvent) {
+        this.id = registeredEvent.getReaderId();
     }
     
     public void confirmReservation(UUID bookId) {
-//        if(){
-//            throws
-//        }
         apply(new BookReservationFinalized(this.id, bookId));
     }
     

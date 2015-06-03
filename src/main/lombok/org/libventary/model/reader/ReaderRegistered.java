@@ -1,4 +1,4 @@
-package org.libventary.command.book;
+package org.libventary.model.reader;
 
 import java.util.UUID;
 
@@ -8,9 +8,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ReserveBookCmd {
+public class ReaderRegistered {
 
-    private final UUID bookId;
     private final UUID readerId;
-    
+    private final String name;
+    private final Address address;
 }

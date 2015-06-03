@@ -5,10 +5,9 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @AllArgsConstructor
 @Getter
-public class AddBookCmd {
+public class AmendBookDetailsCmd {
 
     private final UUID bookId;
     private final String title;

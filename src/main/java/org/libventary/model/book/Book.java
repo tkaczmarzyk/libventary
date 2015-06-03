@@ -1,11 +1,12 @@
 package org.libventary.model.book;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
-import org.libventary.model.librarycard.BorrowingLimitEstablished;
+import org.libventary.model.reader.BorrowingLimitEstablished;
 
 
 public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
@@ -23,12 +24,12 @@ public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
     }
     
     public Book(UUID id, String title) {
-        apply(new NewBookAdded(id, title));
+        apply(new BookAdded(id, title));
         apply(new BorrowingLimitEstablished(id, INITIAL_BORROWING_LIMIT));
     }
     
     @EventHandler
-    protected void handle(NewBookAdded event) {
+    protected void handle(BookAdded event) {
         this.id = event.getBookId();
     }
     
@@ -41,6 +42,6 @@ public class Book extends AbstractAnnotatedAggregateRoot<UUID> {
         if(reserved) {
             new BookAlreadyBorrowedException();
         }
-        apply(new BookReserved(id, cardId));
+        apply(new BookReserved(id, cardId, LocalDate.now(), LocalDate.MAX));
     }
 }

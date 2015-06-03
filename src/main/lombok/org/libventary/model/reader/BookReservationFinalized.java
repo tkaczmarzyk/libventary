@@ -1,4 +1,4 @@
-package org.libventary.model.librarycard;
+package org.libventary.model.reader;
 
 import java.util.UUID;
 
@@ -10,8 +10,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString
-public class LibraryCardRegistered {
+public class BookReservationFinalized {
 
     private final UUID libraryCardId;
-    private final String cardholderName;
+    private final UUID bookId;
 }

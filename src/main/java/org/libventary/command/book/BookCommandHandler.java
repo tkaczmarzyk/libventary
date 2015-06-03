@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.repository.Repository;
 import org.libventary.model.book.Book;
-import org.libventary.model.librarycard.LibraryCard;
+import org.libventary.model.librarycard.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 public class BookCommandHandler {
 
     private final Repository<Book> bookRepo;
-    private final Repository<LibraryCard> libraryCardRepo;
+    private final Repository<Reader> libraryCardRepo;
     
     @Autowired
-    public BookCommandHandler(Repository<Book> bookRepo, Repository<LibraryCard> libraryCardRepo) {
+    public BookCommandHandler(Repository<Book> bookRepo, Repository<Reader> libraryCardRepo) {
         this.bookRepo = bookRepo;
         this.libraryCardRepo = libraryCardRepo;
     }
@@ -31,7 +31,7 @@ public class BookCommandHandler {
     @CommandHandler
     public void handle(ReserveBookCmd cmd) {
         Book book = bookRepo.load(cmd.getBookId());
-        book.reserveBy(cmd.getCardId());
+        book.reserveBy(cmd.getReaderId());
     }
 
 }

@@ -5,14 +5,11 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @AllArgsConstructor
 @Getter
-public class AddBookCmd {
+public class CollectBookCmd {
 
     private final UUID bookId;
-    private final String title;
-    private final String author;
-    private final Integer maxRentalDays;
+    private final UUID readerId;
     
 }

@@ -14,15 +14,12 @@ import org.axonframework.eventstore.EventStore;
 import org.axonframework.eventstore.jpa.JpaEventStore;
 import org.axonframework.saga.GenericSagaFactory;
 import org.axonframework.saga.SagaFactory;
-import org.axonframework.saga.SagaManager;
 import org.axonframework.saga.SagaRepository;
-import org.axonframework.saga.annotation.AnnotatedSagaManager;
 import org.axonframework.saga.repository.jpa.JpaSagaRepository;
 import org.axonframework.saga.spring.SpringResourceInjector;
 import org.axonframework.unitofwork.SpringTransactionManager;
 import org.libventary.model.book.Book;
-import org.libventary.model.librarycard.LibraryCard;
-import org.libventary.model.onlinereservation.OnlineReservationSaga;
+import org.libventary.model.librarycard.Reader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +57,7 @@ public class AxonConfig {
 	@Bean
 	public EventBus eventBus() {
 		EventBus eventBus = new SimpleEventBus();
-		eventBus.subscribe(sagaManager());
+//		eventBus.subscribe(sagaManager());
 		return eventBus;
 	}
 
@@ -86,10 +83,10 @@ public class AxonConfig {
 	    return new SpringResourceInjector();
 	}
 	
-	@Bean
-	public SagaManager sagaManager() {
-	    return new AnnotatedSagaManager(sagaRepository(), sagaFactory(), OnlineReservationSaga.class);
-	}
+//	@Bean
+//	public SagaManager sagaManager() {
+//	    return new AnnotatedSagaManager(sagaRepository(), sagaFactory(), OnlineReservationSaga.class);
+//	}
 	
 	@Bean
 	public SagaFactory sagaFactory() {
@@ -127,8 +124,8 @@ public class AxonConfig {
 	// Maybe there is a way to automatically generate EventSourcingRepositories by annotations too?
 
 	@Bean
-    public EventSourcingRepository<LibraryCard> libraryCardRepository() {
-        EventSourcingRepository<LibraryCard> repository = new EventSourcingRepository<>(LibraryCard.class, eventStore());
+    public EventSourcingRepository<Reader> libraryCardRepository() {
+        EventSourcingRepository<Reader> repository = new EventSourcingRepository<>(Reader.class, eventStore());
         repository.setEventBus(eventBus());
         return repository;
     }
